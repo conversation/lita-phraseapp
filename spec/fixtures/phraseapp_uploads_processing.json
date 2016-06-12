@@ -1,0 +1,16 @@
+{
+ "event": "uploads:processing",
+ "message": "foo initialized file upload en.yml in project bar\n",
+ "user": {
+   "id": "0123456",
+   "username": "foo"
+ },
+ "project": {
+   "name": "bar"
+ },
+ "upload": {
+   "id": "6543210",
+   "filename": "en.yml",
+   "format": "yml"
+ }
+}
