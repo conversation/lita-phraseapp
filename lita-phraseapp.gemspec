@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name = "lita-phraseapp"
-  spec.version = "1.0.0"
+  spec.version = "0.1.0"
   spec.summary = "Lita handler for interacting with phraseapp.com, a translation management application"
   spec.description = "Lita handler for interacting with phraseapp.com, a translation management application"
   spec.license = "MIT"
