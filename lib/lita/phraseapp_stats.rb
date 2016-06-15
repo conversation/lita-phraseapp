@@ -13,12 +13,15 @@ module Lita
       def print_event(payload)
         event = payload[:event]
         print_stats(event) if event.name == "uploads:create"
+        robot.send_message(target, "channel name: #{config.channel_name}")
+        robot.send_message(target, Lita::Room.find_by_name(config.channel_name).inspect)
       end
 
       private
 
       def print_stats(event)
         project_id = phraseapp_gateway.project_name_to_id(event.project_name)
+
         if project_id
           robot.send_message(target, "[phraseapp] #{event.message}")
           robot.send_message(target, locale_stats_message(project_id))
@@ -37,7 +40,7 @@ module Lita
       end
 
       def target
-        Source.new(room: Lita::Room.find_by_name(config.channel_name) || "general")
+        Source.new(room: Lita::Room.find_by_name("tcbot-testing") || "general")
       end
 
       def phraseapp_gateway
