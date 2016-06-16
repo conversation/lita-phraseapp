@@ -24,8 +24,7 @@ module Lita
       def print_stats(event)
         project_id = phraseapp_gateway.project_name_to_id(event.project_name)
         if project_id
-          robot.send_message(target, "[phraseapp] #{event.message}")
-          robot.send_message(target, locale_stats_message(project_id))
+          robot.send_message(target, "[phraseapp] #{event.message}\n" + locale_stats_message(project_id))
         end
       end
 
@@ -35,7 +34,7 @@ module Lita
       end
 
       def locales_to_message(locales)
-        "Locales:\n" + locales.map { |locale|
+        locales.map { |locale|
           "- #{locale.name}: #{locale.completed}/#{locale.total} (#{locale.percent.to_s("F")}%)"
         }.join("\n")
       end
