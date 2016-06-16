@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    lita-phraseapp (1.0.0)
+    lita-phraseapp (0.1.0)
       lita
       phraseapp-ruby (= 1.1.0)
 
