@@ -12,7 +12,11 @@ module Lita
 
       def print_event(payload)
         event = payload[:event]
-        print_stats(event) if event.name == "uploads:create"
+        if event.name == "uploads:create"
+          after(60) do
+            print_stats(event)
+          end
+        end
       end
 
       private
