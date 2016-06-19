@@ -21,7 +21,7 @@ module Lita
       private
 
       def queue_stats_report(event)
-        after(60) do
+        after(ONE_MINUTE) do
           persistent_every("limit-#{event.project_name}", ONE_MINUTE) do
             print_stats(event)
           end
