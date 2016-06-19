@@ -8,6 +8,13 @@ Add this gem to your lita installation by including the following line in your G
 
     gem "lita-phraseapp"
 
+## Configuration
+
+An API key is required to interact with the phraseapp API. To set it, add the following line
+to your lita\_config.rb:
+
+    config.handlers.phraseapp.api_key = "your-key"
+
 ## Externally triggered events
 
 This handler can phraseapp events and trigger a variety of activities as appropriate. To
