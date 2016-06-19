@@ -12,7 +12,7 @@ module Lita
 
       def print_event(payload)
         event = payload[:event]
-        if event.name == "uploads:create"
+        if event.name == "uploads:processing"
           after(60) do
             print_stats(event)
           end
