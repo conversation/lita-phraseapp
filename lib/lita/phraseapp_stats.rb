@@ -1,4 +1,5 @@
 require "lita"
+require "lita-timing"
 require_relative 'phraseapp_event'
 require_relative 'phraseapp_gateway'
 
@@ -6,20 +7,26 @@ module Lita
   module Handlers
     # Print phraseapp project stats to a channel
     class PhraseappStats < Handler
+      ONE_MINUTE = 60
+
       config :channel_name
 
       on :phraseapp_event, :print_event
 
       def print_event(payload)
         event = payload[:event]
-        if event.name == "uploads:processing"
-          after(60) do
+        queue_stats_report(event) if event.name == "uploads:processing"
+      end
+
+      private
+
+      def queue_stats_report(event)
+        after(ONE_MINUTE) do
+          persistent_every("limit-#{event.project_name}", ONE_MINUTE) do
             print_stats(event)
           end
         end
       end
-
-      private
 
       def print_stats(event)
         project_id = phraseapp_gateway.project_name_to_id(event.project_name)
@@ -45,6 +52,10 @@ module Lita
 
       def phraseapp_gateway
         @gateway ||= PhraseappGateway.new(Lita.config.handlers.phraseapp.api_key)
+      end
+
+      def persistent_every(name, seconds, &block)
+        Lita::Timing::RateLimit.new(name, redis).once_every(seconds, &block)
       end
 
     end
