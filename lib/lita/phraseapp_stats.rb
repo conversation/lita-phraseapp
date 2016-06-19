@@ -1,7 +1,7 @@
 require "lita"
 require "lita-timing"
-require_relative 'phraseapp_event'
-require_relative 'phraseapp_gateway'
+require "lita/phraseapp_event"
+require "lita/phraseapp_gateway"
 
 module Lita
   module Handlers

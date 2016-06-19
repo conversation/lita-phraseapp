@@ -1,5 +1,5 @@
 require "lita"
-require_relative 'phraseapp_event'
+require "lita/phraseapp_event"
 
 module Lita
   module Handlers
